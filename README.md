@@ -25,12 +25,19 @@ b → Recapture background
 
 ✨ Key Code Steps
 cap = cv2.VideoCapture(0)             # Open webcam
+
 bg = cv2.flip(cap.read()[1], 1)       # Capture background
+
 hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)  # Convert to HSV
+
 mask = cv2.inRange(hsv, lower, upper) # Detect red cloak
+
 cloak = cv2.bitwise_and(bg, bg, mask=mask)  
+
 rest  = cv2.bitwise_and(frame, frame, mask=cv2.bitwise_not(mask))
+
 final = cv2.addWeighted(cloak, 1, rest, 1, 0)  # Merge
+
 
 📸 Example
 Without cloak → background captured.
